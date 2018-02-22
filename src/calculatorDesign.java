@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+
 
 public class calculatorDesign extends JFrame implements ActionListener{
 	/**
@@ -27,13 +29,13 @@ public class calculatorDesign extends JFrame implements ActionListener{
 			 this.add(calculatorPanel);
 			 // creating buttons for the calculator GUI
 			 JButton Pi = new JButton("\u03C0");
-			 JButton factorial = new JButton("X!");
+			 JButton factorial = new JButton("!");
 			 JButton openBracket = new JButton("(");
 			 JButton closeBracket = new JButton(")");
 			 JButton percentage = new JButton("%");
 			 JButton clearDisplay = new JButton("CE");
 			 JButton sine = new JButton("sin");
-			 JButton ln = new JButton("ln");
+			 JButton e = new JButton("e");
 			 JButton num7 = new JButton("7");
 			 JButton num8 = new JButton("8");
 			 JButton num9 = new JButton("9");
@@ -57,6 +59,21 @@ public class calculatorDesign extends JFrame implements ActionListener{
 			 JButton equalTo = new JButton("=");
 			 JButton addition = new JButton("+");
 			 
+			 Color color = new Color(240, 245, 245);
+			 Color col = new  Color (0, 128, 128);
+			 num1.setBackground(color);
+			 num2.setBackground(color);
+			 num3.setBackground(color);
+			 num4.setBackground(color);
+			 num5.setBackground(color);
+			 num6.setBackground(color);
+			 num7.setBackground(color);
+			 num8.setBackground(color);
+			 num9.setBackground(color);
+			 point.setBackground(color);
+			 zero.setBackground(color);
+			 equalTo.setBackground(col);
+			 
 			// Add buttons to the number panel
 			 numberPanel.add(Pi);
 			 numberPanel.add(factorial);
@@ -65,7 +82,7 @@ public class calculatorDesign extends JFrame implements ActionListener{
 			 numberPanel.add(percentage); 
 			 numberPanel.add(clearDisplay); 
 			 numberPanel.add(sine); 
-			 numberPanel.add(ln); 
+			 numberPanel.add(e); 
 			 numberPanel.add(num7); 
 			 numberPanel.add(num8); 
 			 numberPanel.add(num9); 
@@ -97,7 +114,29 @@ public class calculatorDesign extends JFrame implements ActionListener{
 						String displayText = ((JButton)evt.getSource()).getText();
 						display.setText(display.getText()+displayText);				
 					}});
-			 factorial.addActionListener(this);
+			 factorial.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent evt) {
+						// TODO Auto-generated method stub
+						/*String displayText = ((JButton)evt.getSource()).getText();						
+						display.setText(display.getText()+displayText);
+						String val = display.getText();
+						System.out.printe(String.valueOf(displayText));
+						String[] num =displayText.split("[^a-zA-Z_0-9]");
+						int[] numval = new int[1];
+						numval[1]= (int) Double.parseDouble(num[1]);
+						int N = numval[0];						
+						long valuOffactorial = 1;
+					for (int i = 1; i <= N; i++) {
+				    	   valuOffactorial = valuOffactorial * i;  
+				    }
+				       display.setText(val+valuOffactorial);   
+				            */
+					}});
+			 
+			
+				
+				
 			 openBracket.addActionListener(this);
 			 closeBracket.addActionListener(this);
 			 percentage.addActionListener(this);
@@ -118,15 +157,7 @@ public class calculatorDesign extends JFrame implements ActionListener{
 						System.out.println(String.valueOf(displayText));
 						
 					}});
-			 ln.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						String displayText = ((JButton)evt.getSource()).getText() + "()";						
-						display.setText(display.getText()+displayText);
-						System.out.println(String.valueOf(displayText));
-						
-					}});
+			 e.addActionListener(this);
 			 num7.addActionListener(this);
 			 num8.addActionListener(this);
 			 num9.addActionListener(this);
@@ -227,7 +258,7 @@ public class calculatorDesign extends JFrame implements ActionListener{
 						       replace("X\u2078", "^").
 						       replace("EXP","Math.exp").
 						       replace("log", "Math.log").
-						       //replace("log", "Math.log" + "/Math.log(10").
+						       replace("e", "Math.exp(1.0)").
 						       replace("\u03C0", "Math.PI").
 						       replace("%","/100");
 						System.out.println(replacedDisplay);
@@ -240,7 +271,7 @@ public class calculatorDesign extends JFrame implements ActionListener{
 			   	        ScriptEngine engine = mathEquations.getEngineByName("JavaScript");
 			   	        
 			   	     try {							
-							 double value = (double) (engine.eval(replacedDisplay));
+							 double value = (double) engine.eval(replacedDisplay);
 							 System.out.println(value);
 							 String finalResult = String.valueOf(value);
 							 display.setText(finalResult);
@@ -257,6 +288,7 @@ public class calculatorDesign extends JFrame implements ActionListener{
 						// Get the value of the buttons
 						String displayText = ((JButton)evt.getSource()).getText();
 						display.setText(display.getText()+displayText);
+						point.setEnabled(true);
 					}});
 		}
 	@Override
