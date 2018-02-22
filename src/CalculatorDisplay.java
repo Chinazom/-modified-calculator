@@ -18,6 +18,7 @@ public class CalculatorDisplay extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+
 		// TODO Auto-generated method stub
 		// gets the from the buttons a 
 		this.getText();

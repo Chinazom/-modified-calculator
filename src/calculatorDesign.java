@@ -1,7 +1,6 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -11,17 +10,16 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 
-public class calculatorDesign extends JFrame{
+public class calculatorDesign extends JFrame implements ActionListener{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 1L;	
+	JTextArea display =  new JTextArea(4,6);	
 	// TODO Auto-generated constructor stub
 		public calculatorDesign() { 
 			//CalculatorDisplay CalculatorDisplay = new CalculatorDisplay (name,display);
-			 JPanel calculatorPanel = new JPanel ();	
-			 JTextArea display =  new JTextArea(4,6);
+			 JPanel calculatorPanel = new JPanel ();
 			 JPanel numberPanel = new JPanel();
 			 numberPanel.setLayout(new GridLayout(5, 6));
 			 JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, display,numberPanel);
@@ -54,7 +52,7 @@ public class calculatorDesign extends JFrame{
 			 JButton subtraction = new JButton("-");
 			 JButton exponential = new JButton("EXP");
 			 JButton XraisedtoPower = new JButton("X\u2072");
-			 JButton zero = new JButton("0");
+			 JButton zero = new JButton("" + 0);
 			 JButton point = new JButton(".");
 			 JButton equalTo = new JButton("=");
 			 JButton addition = new JButton("+");
@@ -91,42 +89,18 @@ public class calculatorDesign extends JFrame{
 			 numberPanel.add(equalTo); 
 			 numberPanel.add(addition); 
 		
-// add action listeners to the buttons
+// add action listeners to the buttons			 
 			 Pi.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent evt) {
-					// TODO Auto-generated method stub
-					// Get the value of the buttons
-					String val = ((JButton)evt.getSource()).getText();					
-				}});
-			 factorial.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText();
+						display.setText(display.getText()+displayText);				
 					}});
-			 openBracket.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();						
-					}});
-			 closeBracket.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
-			 percentage.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
+			 factorial.addActionListener(this);
+			 openBracket.addActionListener(this);
+			 closeBracket.addActionListener(this);
+			 percentage.addActionListener(this);
 			 clearDisplay.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
@@ -139,87 +113,57 @@ public class calculatorDesign extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText() + "()";						
+						display.setText(display.getText()+displayText);
+						System.out.println(String.valueOf(displayText));
+						
 					}});
 			 ln.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText() + "()";						
+						display.setText(display.getText()+displayText);
+						System.out.println(String.valueOf(displayText));
+						
 					}});
-			 num7.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
-			 num8.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
-			 num9.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
+			 num7.addActionListener(this);
+			 num8.addActionListener(this);
+			 num9.addActionListener(this);
 			 division.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
 						// Get the value of the buttons
+						String displayText = ((JButton)evt.getSource()).getText();
+						display.setText(display.getText()+displayText);
 						//enables the point button
-						String val = ((JButton)evt.getSource()).getText();
 						point.setEnabled(true);
 					}});
 			 cosine.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText() + "()";						
+						display.setText(display.getText()+displayText);						
 					}});
 			 log.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText() + "()";						
+						display.setText(display.getText()+displayText);						
 					}});
-			 num4.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
-			 num5.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
-			 num6.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
+			 num4.addActionListener(this);
+			 num5.addActionListener(this);
+			 num6.addActionListener(this);
 			 multiplication.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
 						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();
+						String displayText = ((JButton)evt.getSource()).getText();
+						display.setText(display.getText()+displayText);
 						//enables the point button
 						point.setEnabled(true);
 					}});
@@ -227,43 +171,26 @@ public class calculatorDesign extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText() + "()";						
+						display.setText(display.getText()+displayText);						
 					}});
 			 squareRoot.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText() + "()";						
+						display.setText(display.getText()+displayText);						
 					}});
-			 num1.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
-			 num2.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
-			 num3.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
+			 num1.addActionListener(this);
+			 num2.addActionListener(this);
+			 num3.addActionListener(this);
 			 subtraction.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
 						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();
+						String displayText = ((JButton)evt.getSource()).getText();
+						display.setText(display.getText()+displayText);
 						//enables the point button
 						point.setEnabled(true);
 					}});
@@ -271,29 +198,19 @@ public class calculatorDesign extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText() + "()";						
+						display.setText(display.getText()+displayText);						
 					}});
-			 XraisedtoPower.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
-			 zero.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent evt) {
-						// TODO Auto-generated method stub
-						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
-					}});
+			 XraisedtoPower.addActionListener(this);						
+			 zero.addActionListener(this);
 			 point.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
 						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();
+						String displayText = ((JButton)evt.getSource()).getText();
+						display.setText(display.getText()+displayText);
+						//enables the point button
 						point.setEnabled(false);
 					}});
 			 equalTo.addActionListener(new ActionListener() {
@@ -302,15 +219,28 @@ public class calculatorDesign extends JFrame{
 						// TODO Auto-generated method stub
 						// Get the value of the display
 						String val = (display.getText());
+						// replace the value with their respective java operators/class  
+						String replacedDisplay =val.replace("sin","Math.sin").				
+						       replace("cos", "Math.cos").
+						       replace("tan", "Math.tan").
+						       replace("\u221A","Math.sqrt").
+						       replace("X\u2078", "^").
+						       replace("EXP","Math.exp").
+						       replace("log", "Math.log").
+						       //replace("log", "Math.log" + "/Math.log(10").
+						       replace("\u03C0", "Math.PI").
+						       replace("%","/100");
+						System.out.println(replacedDisplay);
 						//enables the point button
 						point.setEnabled(true);
 						display.setText("");
 						
+						
 						ScriptEngineManager mathEquations = new ScriptEngineManager();
 			   	        ScriptEngine engine = mathEquations.getEngineByName("JavaScript");
-			   	        //String exp = val;
+			   	        
 			   	     try {							
-							 double value = (double) (engine.eval(val));
+							 double value = (double) (engine.eval(replacedDisplay));
 							 System.out.println(value);
 							 String finalResult = String.valueOf(value);
 							 display.setText(finalResult);
@@ -325,15 +255,16 @@ public class calculatorDesign extends JFrame{
 					public void actionPerformed(ActionEvent evt) {
 						// TODO Auto-generated method stub
 						// Get the value of the buttons
-						String val = ((JButton)evt.getSource()).getText();		            				
+						String displayText = ((JButton)evt.getSource()).getText();
+						display.setText(display.getText()+displayText);
 					}});
-	 
-	 
-	 
-	 
-	
-	
 		}
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		// TODO Auto-generated method stub
+		 String val = ((JButton)event.getSource()).getText();
+		 display.setText(display.getText()+val);		 
+	}
 		
 }
 
